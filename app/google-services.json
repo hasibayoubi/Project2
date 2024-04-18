@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "461472237569",
+    "project_id": "handy-mobile-app-2dc99",
+    "storage_bucket": "handy-mobile-app-2dc99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461472237569:android:a4a8545df638890d375800",
+        "android_client_info": {
+          "package_name": "com.example.handymobileapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkDaZK8UaV09UlBjMM6u622TpPH4yrbAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
