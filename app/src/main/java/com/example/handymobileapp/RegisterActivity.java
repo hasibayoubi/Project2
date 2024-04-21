@@ -180,7 +180,7 @@ public class RegisterActivity extends AppCompatActivity {
      * Clears all previous activities from the stack to prevent returning to the registration screen via the back button.
      */
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(RegisterActivity.this, HandyHomeActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, calendar.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
