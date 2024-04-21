@@ -26,17 +26,6 @@
         android:label="Forgot Password Activity"
         tools:layout="@layout/activity_forgot_password" />
 
-    <!-- Define HomeActivity as a destination -->
-    <activity
-        android:id="@+id/HomeActivity"
-        android:name="com.example.handymobileapp.HomeActivity"
-        android:label="Home Activity"
-        tools:layout="@layout/activity_home">
-        <!-- Define an action to navigate from HomeActivity to calendar -->
-        <action
-            android:id="@+id/action_home_to_calendar"
-            app:destination="@id/calendar" />
-    </activity>
 
     <!-- Define CalendarActivity as a destination -->
     <activity
