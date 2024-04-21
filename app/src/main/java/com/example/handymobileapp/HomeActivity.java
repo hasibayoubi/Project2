@@ -1,6 +1,8 @@
 package com.example.handymobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,9 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
     }
+    public void goToNextActivity(View view) {
+        Intent intent = new Intent(this, calendar.class);
+        startActivity(intent);
+    }
+
 }

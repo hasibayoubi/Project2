@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/MainActivity">
+
+    <!-- Define MainActivity as a destination -->
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="com.example.handymobileapp.MainActivity"
+        android:label="Login Activity"
+        tools:layout="@layout/activity_main" />
+
+    <!-- Define RegisterActivity as a destination -->
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.example.handymobileapp.RegisterActivity"
+        android:label="Register Activity"
+        tools:layout="@layout/activity_register" />
+
+    <!-- Define ForgotPasswordActivity as a destination -->
+    <activity
+        android:id="@+id/forgotPasswordActivity"
+        android:name="com.example.handymobileapp.ForgotPasswordActivity"
+        android:label="Forgot Password Activity"
+        tools:layout="@layout/activity_forgot_password" />
+
+    <!-- Define HomeActivity as a destination -->
+    <activity
+        android:id="@+id/HomeActivity"
+        android:name="com.example.handymobileapp.HomeActivity"
+        android:label="Home Activity"
+        tools:layout="@layout/activity_home">
+        <!-- Define an action to navigate from HomeActivity to calendar -->
+        <action
+            android:id="@+id/action_home_to_calendar"
+            app:destination="@id/calendar" />
+    </activity>
+
+    <!-- Define CalendarActivity as a destination -->
+    <activity
+        android:id="@+id/calendar"
+        android:name="com.example.handymobileapp.calendar"
+        android:label="Calendar Activity"
+        tools:layout="@layout/calendarview" />
+
+</navigation>
