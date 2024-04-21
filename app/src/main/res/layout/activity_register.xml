@@ -21,6 +21,66 @@
             >
 
             <EditText
+                android:id="@+id/dob"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Date of Birth"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/lastName"
+                app:layout_constraintStart_toStartOf="@+id/lastName"
+                app:layout_constraintTop_toBottomOf="@+id/lastName" />
+
+            <EditText
+                android:id="@+id/lastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:ems="10"
+                android:hint="Last Name"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <EditText
                 android:id="@+id/inputCPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -44,7 +104,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="60dp"
                 android:fontFamily="@font/alata"
                 android:text="Register"
                 android:textColor="@color/white"
@@ -59,8 +119,7 @@
                 android:id="@+id/inputEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:drawableLeft="@drawable/baseline_account_box_24"
                 android:drawablePadding="10dp"
@@ -75,8 +134,8 @@
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintStart_toStartOf="@+id/dob"
+                app:layout_constraintTop_toBottomOf="@+id/dob" />
 
             <EditText
                 android:id="@+id/inputPassword"
@@ -121,6 +180,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/btnRegister"
                 app:layout_constraintStart_toStartOf="@+id/btnRegister"
                 app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

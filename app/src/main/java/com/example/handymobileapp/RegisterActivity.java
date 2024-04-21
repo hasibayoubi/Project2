@@ -2,7 +2,9 @@ package com.example.handymobileapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,10 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * RegisterActivity handles user registration using Firebase authentication.
@@ -35,6 +45,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     /** EditText field for user to confirm password input */
     EditText inputCPassword;
+    EditText name;
+    EditText lastName;
+    EditText dateOfBirth;
 
     /** Button for triggering the registration process */
     Button btnRegister;
@@ -50,6 +63,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     /** FirebaseUser instance for getting the current logged in user */
     FirebaseUser mUser;
+    String userID;
+    FirebaseFirestore mStore;
+
 
     /**
      * Called when the activity is starting.
@@ -61,6 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
 
+        name = findViewById(R.id.name);
+        lastName = findViewById(R.id.lastName);
+        dateOfBirth = findViewById(R.id.dob);
         alreadyHaveAccount = findViewById(R.id.alreadyHaveAccount);
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
@@ -68,7 +87,9 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
+        mStore = FirebaseFirestore.getInstance();
         mUser = mAuth.getCurrentUser();
+
 
         alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,13 +107,21 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * Perform user registration using email and password.
+     * Performs user registration using email and password entered along with additional user details
+     * like name, last name, and date of birth. It validates the user inputs and interacts with Firebase
+     * Authentication to create a user account. Post registration, it saves additional user details to
+     * Firestore under a document that uses the user's UID as the identifier.
      */
     private void performAuthorization() {
+        // Retrieve user inputs from EditText fields
+        String usersName = name.getText().toString();
+        String usersLastName = lastName.getText().toString();
+        String dob = dateOfBirth.getText().toString();
         String email = inputEmail.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
         String confirmPassword = inputCPassword.getText().toString().trim();
 
+        // Validate email pattern
         if (!email.matches(emailPattern)) {
             inputEmail.setError("Enter a valid email address!");
             inputEmail.requestFocus();
@@ -111,15 +140,34 @@ public class RegisterActivity extends AppCompatActivity {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
+            // Create a user with email and password in Firebase Authentication
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
-                            if (task.isSuccessful()) {
-                                sendUserToNextActivity();
+                            progressDialog.dismiss(); // Dismiss the progress dialog on completion
+                            if (task.isSuccessful()) { // Registration success
+                                sendUserToNextActivity(); // Navigate to the next activity
                                 Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                            } else {
+                                userID = mAuth.getCurrentUser().getUid();  // Get the user ID from Firebase
+
+                                // Create a document reference in Firestore using the user ID
+                                DocumentReference documentReference = mStore.collection("users").document(userID);
+                                Map <String, Object> hashMap = new HashMap<>();
+                                hashMap.put("name", usersName);
+                                hashMap.put("lastName", usersLastName);
+                                hashMap.put("dateOfBirth", dob);
+
+                                // Set the user details in Firestore
+                                documentReference.set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d("TAG", "User profile is created for "+userID);
+
+                                    }
+                                });
+
+                            } else { // Registration failure
                                 Toast.makeText(RegisterActivity.this, "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
@@ -132,7 +180,7 @@ public class RegisterActivity extends AppCompatActivity {
      * Clears all previous activities from the stack to prevent returning to the registration screen via the back button.
      */
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, HandyHomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
