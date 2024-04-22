@@ -34,4 +34,10 @@
         android:label="Calendar Activity"
         tools:layout="@layout/calendarview" />
 
+    <activity
+        android:id="@+id/newEvent"
+        android:name="com.example.handymobileapp.NewEvent"
+        android:label="NewEvent"
+        tools:layout="@layout/activity_newevent"/>
+
 </navigation>
