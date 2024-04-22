@@ -21,7 +21,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class NewEvent extends AppCompatActivity {
@@ -94,6 +98,19 @@ public class NewEvent extends AppCompatActivity {
             return;
         }
 
+        String formattedDate = formatDate(date);
+        if (formattedDate == null) {
+            Toast.makeText(this, "Invalid date format", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Format time to "HH:mm a" (e.g., "12:30 PM")
+        String formattedTime = formatTime(time);
+        if (formattedTime == null) {
+            Toast.makeText(this, "Invalid time format", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Upload file if selected
         if (selectedFileUri != null) {
             StorageReference fileRef = storageRef.child("event_attachments/" + selectedFileUri.getLastPathSegment());
@@ -107,7 +124,7 @@ public class NewEvent extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 String downloadUrl = uri.toString();
-                                addEventToFirestore(title, date, time, description, downloadUrl);
+                                addEventToFirestore(title, formattedDate, formattedTime, description, downloadUrl);
                             }
                         });
                     } else {
@@ -117,7 +134,20 @@ public class NewEvent extends AppCompatActivity {
             });
         } else {
             // No file attached, add event without attachment
-            addEventToFirestore(title, date, time, description, null);
+            addEventToFirestore(title, formattedDate, formattedTime, description, null);
+        }
+    }
+
+    private String formatTime(String inputTime) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
+            Date time = inputFormat.parse(inputTime);
+
+            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
+            return outputFormat.format(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -135,10 +165,30 @@ public class NewEvent extends AppCompatActivity {
                 .add(eventData)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(NewEvent.this, "Event added successfully", Toast.LENGTH_SHORT).show();
-                    finish();
+                    navigateToCalendarActivity(); // Navigate to CalendarActivity upon success
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(NewEvent.this, "Failed to add event", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private String formatDate(String inputDate){
+        try {
+            //Parse input date in mm/dd/yyyy
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            Date date = inputDateFormat.parse(inputDate);
+
+            //format date to YYYY-MM-DD
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            return outputDateFormat.format(date);
+        } catch (ParseException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    private void navigateToCalendarActivity() {
+        Intent intent = new Intent(NewEvent.this, calendar.class);
+        startActivity(intent);
+        finish(); // Finish current activity to prevent going back to NewEventActivity
     }
 }
