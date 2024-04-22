@@ -140,10 +140,10 @@ public class NewEvent extends AppCompatActivity {
 
     private String formatTime(String inputTime) {
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
+            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
             Date time = inputFormat.parse(inputTime);
 
-            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
             return outputFormat.format(time);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -165,7 +165,7 @@ public class NewEvent extends AppCompatActivity {
                 .add(eventData)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(NewEvent.this, "Event added successfully", Toast.LENGTH_SHORT).show();
-                    navigateToCalendarActivity(); // Navigate to CalendarActivity upon success
+                    finish();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(NewEvent.this, "Failed to add event", Toast.LENGTH_SHORT).show();
