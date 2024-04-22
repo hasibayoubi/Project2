@@ -5,53 +5,48 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
-public class calendar extends AppCompatActivity{
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.CalendarView;
+import android.widget.TextView;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
-    private int year1 = 0;
-    private int month1 = 0;
-    private int day1 = 0;
-    private int total1 = 0;
-    private int total2 = 0;
+public class calendar extends AppCompatActivity {
+
+    private TextView selectedDateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendarview);
 
+        selectedDateTextView = findViewById(R.id.textView);
+
         CalendarView calendarView = findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-                year1 = i;
-                month1 = i1 + 1;
-                day1 = i2;
+            public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
+                Calendar selectedCalendar = Calendar.getInstance();
+                selectedCalendar.set(year, month, dayOfMonth);
+                updateSelectedDate(selectedCalendar);
             }
         });
+
+        // Initialize selected date to current date
+        Calendar currentCalendar = Calendar.getInstance();
+        updateSelectedDate(currentCalendar);
     }
 
-    public void calculate(View view) {
-        total1 = (year1 * 360) + (month1 * 30) + day1;
-
-        System.out.println(total1);
-        System.out.println(total2);
-
-        TextView textView = findViewById(R.id.textView);
-
-        if (total1 - total2 == 0 || total1 - total2 > 1)
-            textView.setText((total1 - total2) + " Days After Today");
-        else if (total1 - total2 < 0)
-            textView.setText((total1 - total2) + " Days Before Today");
-        else if (total1 - total2 == 1)
-            textView.setText((total1 - total2) + " Day After Today");
-
-        Calendar calendar = Calendar.getInstance();
-        int year2 = calendar.get(Calendar.YEAR);
-        int month2 = calendar.get(Calendar.MONTH) + 1;
-        int day2 = calendar.get(Calendar.DAY_OF_MONTH);
-        total2 = (year2 * 360) + (month2 * 30) + day2;
+    private void updateSelectedDate(Calendar selectedCalendar) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault());
+        String selectedDateString = sdf.format(selectedCalendar.getTime());
+        selectedDateTextView.setText(selectedDateString);
     }
 }
-
-
