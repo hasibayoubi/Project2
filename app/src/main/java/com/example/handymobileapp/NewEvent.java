@@ -140,10 +140,10 @@ public class NewEvent extends AppCompatActivity {
 
     private String formatTime(String inputTime) {
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
+            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
             Date time = inputFormat.parse(inputTime);
 
-            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
             return outputFormat.format(time);
         } catch (ParseException e) {
             e.printStackTrace();
