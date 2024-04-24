@@ -5,9 +5,15 @@ import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -72,38 +78,57 @@ public class calendar extends AppCompatActivity {
     }
 
     private void displayEvents(QuerySnapshot querySnapshot) {
-        StringBuilder eventsStringBuilder = new StringBuilder();
+        List<Event> eventsList = new ArrayList<>();
 
+        // Parse each document into Event object and add to the list
         for (QueryDocumentSnapshot document : querySnapshot) {
             String title = document.getString("title");
             String time = document.getString("time");
             String description = document.getString("description");
 
-            // Format time from Firestore to display as HH:MM AM/PM
-            String formattedTime = formatTime(time);
+            // Parse time string into a Date object for sorting
+            Date eventTime = parseTimeString(time);
 
-            // Append event details to the StringBuilder
-            eventsStringBuilder.append("Title: ").append(title).append("\n");
-            eventsStringBuilder.append("Time: ").append(formattedTime).append("\n");
-            eventsStringBuilder.append("Description: ").append(description).append("\n\n");
+            // Create Event object and add to list
+            Event event = new Event(title, eventTime, description);
+            eventsList.add(event);
         }
 
-        // Display events in a TextView or handle as needed (e.g., populate a RecyclerView)
+        // Sort eventsList based on eventTime using a Comparator
+        Collections.sort(eventsList, new Comparator<Event>() {
+            @Override
+            public int compare(Event event1, Event event2) {
+                return event1.getTime().compareTo(event2.getTime());
+            }
+        });
+
+        // Prepare the formatted event details for display
+        StringBuilder eventsStringBuilder = new StringBuilder();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+
+        for (Event event : eventsList) {
+            String formattedTime = timeFormat.format(event.getTime());
+
+            // Append event details to the StringBuilder
+            eventsStringBuilder.append("Title: ").append(event.getTitle()).append("\n");
+            eventsStringBuilder.append("Time: ").append(formattedTime).append("\n");
+            eventsStringBuilder.append("Description: ").append(event.getDescription()).append("\n\n");
+        }
+
+        // Display events in a TextView
         TextView eventsTextView = findViewById(R.id.eventsTextView);
         eventsTextView.setText(eventsStringBuilder.toString());
     }
 
-    private String formatTime(String time) {
+    // Helper method to parse time string into a Date object
+    private Date parseTimeString(String timeString) {
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-            Date date = inputFormat.parse(time);
-
-            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-            return outputFormat.format(date);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return time; // Return original time if parsing fails
+            SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+            return format.parse(timeString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
+
 
 }

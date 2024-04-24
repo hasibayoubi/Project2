@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ public class NewEvent extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private StorageReference storageRef;
+    private ToggleButton toggleButton;
 
     private Uri selectedFileUri;
 
@@ -56,6 +58,7 @@ public class NewEvent extends AppCompatActivity {
         editTextDescription = findViewById(R.id.editTextDescription);
         buttonAttachFile = findViewById(R.id.buttonAttachFile);
         buttonSaveEvent = findViewById(R.id.buttonSaveEvent);
+        toggleButton = findViewById(R.id.toggleButton);
 
         buttonAttachFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +108,7 @@ public class NewEvent extends AppCompatActivity {
         }
 
         // Format time to "HH:mm a" (e.g., "12:30 PM")
-        String formattedTime = formatTime(time);
+        String formattedTime = formatTime(time, toggleButton.isChecked());
         if (formattedTime == null) {
             Toast.makeText(this, "Invalid time format", Toast.LENGTH_SHORT).show();
             return;
@@ -138,13 +141,19 @@ public class NewEvent extends AppCompatActivity {
         }
     }
 
-    private String formatTime(String inputTime) {
+    private String formatTime(String inputTime, boolean isPM) {
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
+            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
             Date time = inputFormat.parse(inputTime);
 
-            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm am", Locale.getDefault());
-            return outputFormat.format(time);
+            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
+            String formattedTime = outputFormat.format(time);
+            if(isPM){
+                formattedTime += " PM";
+            }else {
+                formattedTime += " AM";
+            }
+            return formattedTime;
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
@@ -165,7 +174,7 @@ public class NewEvent extends AppCompatActivity {
                 .add(eventData)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(NewEvent.this, "Event added successfully", Toast.LENGTH_SHORT).show();
-                    finish();
+                    navigateToCalendarActivity(); // Navigate to CalendarActivity upon success
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(NewEvent.this, "Failed to add event", Toast.LENGTH_SHORT).show();
