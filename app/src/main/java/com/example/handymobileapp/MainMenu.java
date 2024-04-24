@@ -8,21 +8,20 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/*
 public class MainMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainmenu);
+        setContentView(R.layout.activity_sidebar_mainmenu);
 
         // Initialize buttons and search view
-        ImageView menuIcon = findViewById(R.id.imageButtonMenu);
         Button buttonNewEvent = findViewById(R.id.buttonNewEvent);
-        Button buttonMyEvents = findViewById(R.id.buttonMyEvents);
-        Button buttonAccessCalendar = findViewById(R.id.buttonAccessCalendar);
-        Button buttonInvitations = findViewById(R.id.buttonInvitations);
-        SearchView searchView = findViewById(R.id.searchView);
+        //Button buttonMyEvents = findViewById(R.id.buttonMyEvents);
+        //Button buttonAccessCalendar = findViewById(R.id.buttonAccessCalendar);
+        //Button buttonInvitations = findViewById(R.id.buttonInvitations);
+        // searchView = findViewById(R.id.searchView);
         menuIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -120,4 +119,4 @@ public class MainMenu extends AppCompatActivity {
         popupMenu.show();
     }
 
-}
+}*/
