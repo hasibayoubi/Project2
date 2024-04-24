@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cadetBlue">
+    android:background="@color/cadetBlue"
+    android:clickable="true">
 
     <!-- Event Title -->
     <TextView
@@ -38,7 +40,7 @@
 
     <EditText
         android:id="@+id/editTextDate"
-        android:layout_width="match_parent"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDate"
         android:layout_marginStart="16dp"
@@ -60,12 +62,12 @@
 
     <EditText
         android:id="@+id/editTextTime"
-        android:layout_width="match_parent"
+        android:layout_width="209dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewTime"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="HH:MM AM or PM"
+        android:hint="HH:MM"
         android:inputType="time"
         android:maxLines="1" />
 
@@ -82,7 +84,7 @@
 
     <EditText
         android:id="@+id/editTextDescription"
-        android:layout_width="365dp"
+        android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDescription"
         android:layout_marginStart="16dp"
@@ -127,5 +129,23 @@
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="56dp"
         android:text="Save Event" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTextDescription"
+        android:layout_below="@+id/editTextDate"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="35dp"
+        android:layout_toEndOf="@+id/editTextTime"
+        android:checked="false"
+        android:textOff="AM"
+        android:textOn="PM"
+        android:visibility="visible"
+        tools:visibility="visible" />
 
 </RelativeLayout>
