@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -64,8 +65,11 @@ public class calendar extends AppCompatActivity {
         SimpleDateFormat firestoreDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String formattedDate = firestoreDateFormat.format(selectedCalendar.getTime());
 
-        // Query Firestore for events on the selected date
-        db.collection("events")
+        // Get current user's UID
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Query Firestore for events on the selected date under the user's events subcollection
+        db.collection("users").document(userId).collection("events")
                 .whereEqualTo("date", formattedDate)
                 .get()
                 .addOnCompleteListener(task -> {
@@ -76,6 +80,7 @@ public class calendar extends AppCompatActivity {
                     }
                 });
     }
+
 
     private void displayEvents(QuerySnapshot querySnapshot) {
         List<Event> eventsList = new ArrayList<>();

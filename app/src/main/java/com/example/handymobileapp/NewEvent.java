@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -161,6 +163,13 @@ public class NewEvent extends AppCompatActivity {
     }
 
     private void addEventToFirestore(String title, String date, String time, String description, String attachmentUrl) {
+        // Get current user's UID
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Create a reference to the user's events subcollection
+        CollectionReference userEventsRef = db.collection("users").document(userId).collection("events");
+
+        // Create a new event document within the user's events subcollection
         Map<String, Object> eventData = new HashMap<>();
         eventData.put("title", title);
         eventData.put("date", date);
@@ -170,8 +179,8 @@ public class NewEvent extends AppCompatActivity {
             eventData.put("attachmentUrl", attachmentUrl);
         }
 
-        db.collection("events")
-                .add(eventData)
+        // Add the event data to Firestore under the user's events subcollection
+        userEventsRef.add(eventData)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(NewEvent.this, "Event added successfully", Toast.LENGTH_SHORT).show();
                     navigateToCalendarActivity(); // Navigate to CalendarActivity upon success
@@ -180,6 +189,7 @@ public class NewEvent extends AppCompatActivity {
                     Toast.makeText(NewEvent.this, "Failed to add event", Toast.LENGTH_SHORT).show();
                 });
     }
+
 
     private String formatDate(String inputDate){
         try {
