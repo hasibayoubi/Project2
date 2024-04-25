@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,6 +19,7 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="55dp"
             android:text="Handy"
@@ -38,24 +39,14 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
-        <!-- Add a Toolbar for search and side menu toggle -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentTop="true"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            app:titleTextColor="@android:color/white" />
-
         <!-- Add your buttons below the toolbar -->
         <Button
             android:id="@+id/buttonNewEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@+id/textViewDescription"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="153dp"
+            android:layout_marginTop="55dp"
             android:layout_marginEnd="16dp"
             android:text="New Event" />
 
@@ -64,12 +55,12 @@
     </RelativeLayout>
 
     <!-- NavigationView for side drawer -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white"
-        app:headerLayout="@layout/nav_header" />
+    <!--    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/white"
+            app:headerLayout="@layout/nav_header" />-->
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
