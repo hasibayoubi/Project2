@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
-/*
+/**
 public class MainMenu extends AppCompatActivity {
 
     @Override
@@ -22,6 +22,7 @@ public class MainMenu extends AppCompatActivity {
         //Button buttonAccessCalendar = findViewById(R.id.buttonAccessCalendar);
         //Button buttonInvitations = findViewById(R.id.buttonInvitations);
         // searchView = findViewById(R.id.searchView);
+
         menuIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -36,6 +37,7 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(new Intent(MainMenu.this, NewEvent.class));
             }
         });
+
 
         buttonMyEvents.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,4 +121,5 @@ public class MainMenu extends AppCompatActivity {
         popupMenu.show();
     }
 
-}*/
+}
+*/

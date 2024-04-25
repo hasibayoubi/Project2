@@ -10,6 +10,8 @@
     tools:context=".MainActivity">
 
     <!-- Main content layout -->
+
+    <!-- NavigationView for side drawer -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,7 +27,8 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="34sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@color/white"/>
 
         <TextView
             android:id="@+id/textViewDescription"
@@ -36,10 +39,11 @@
             android:layout_marginTop="25dp"
             android:text="Everything you need to be organized at the palm of your hand"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:background="@color/white"/>
 
         <!-- Add a Toolbar for search and side menu toggle -->
-        <androidx.appcompat.widget.Toolbar
+        <!--        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -47,23 +51,66 @@
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             app:titleTextColor="@android:color/white" />
+-->
 
         <!-- Add your buttons below the toolbar -->
         <Button
             android:id="@+id/buttonNewEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="153dp"
+            android:layout_marginTop="210dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="474dp"
             android:text="New Event" />
 
+        <Button
+            android:id="@+id/buttonMyEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="290dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="393dp"
+            android:text="My Events" />
+
+        <Button
+            android:id="@+id/buttonAccessCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="371dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="312dp"
+            android:text="Access Calendar" />
+
+        <Button
+            android:id="@+id/buttonInvitations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="455dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="228dp"
+            android:text="Invitations" />
         <!-- Other buttons go here -->
 
     </RelativeLayout>
 
-    <!-- NavigationView for side drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
