@@ -24,9 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class calendar extends AppCompatActivity {
 
-    // TextView to display selected date
     private TextView selectedDateTextView;
-    // Firestore instance
     private FirebaseFirestore db;
 
     @Override
@@ -34,19 +32,15 @@ public class calendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendarview);
 
-        // Initialize views and Firestore instance
         selectedDateTextView = findViewById(R.id.textView);
         db = FirebaseFirestore.getInstance();
 
-        // Initialize CalendarView and set listener for date changes
         CalendarView calendarView = findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
-                // Create a Calendar instance for the selected date
                 Calendar selectedCalendar = Calendar.getInstance();
                 selectedCalendar.set(year, month, dayOfMonth);
-                // Update selected date TextView
                 updateSelectedDate(selectedCalendar);
 
                 // Fetch events for the selected date
@@ -57,18 +51,17 @@ public class calendar extends AppCompatActivity {
         // Initialize selected date to current date
         Calendar currentCalendar = Calendar.getInstance();
         updateSelectedDate(currentCalendar);
-        // Fetch events for the current date initially
-        fetchEvents(currentCalendar);
+        fetchEvents(currentCalendar); // Fetch events for the current date initially
+
+
     }
 
-    // Method to update selected date TextView
     private void updateSelectedDate(Calendar selectedCalendar) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault());
         String selectedDateString = sdf.format(selectedCalendar.getTime());
         selectedDateTextView.setText(selectedDateString);
     }
 
-    // Method to fetch events from Firestore for a given date
     private void fetchEvents(Calendar selectedCalendar) {
         // Format selected date to match Firestore query format (yyyy-MM-dd)
         SimpleDateFormat firestoreDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -83,7 +76,6 @@ public class calendar extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Display fetched events
                         displayEvents(task.getResult());
                     } else {
                         Toast.makeText(calendar.this, "Failed to fetch events", Toast.LENGTH_SHORT).show();
@@ -91,7 +83,7 @@ public class calendar extends AppCompatActivity {
                 });
     }
 
-    // Method to display fetched events in a TextView
+
     private void displayEvents(QuerySnapshot querySnapshot) {
         List<Event> eventsList = new ArrayList<>();
 
@@ -144,4 +136,6 @@ public class calendar extends AppCompatActivity {
             throw new RuntimeException(e);
         }
     }
+
+
 }

@@ -18,10 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -30,7 +28,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -38,7 +35,7 @@ public class NewEvent extends AppCompatActivity {
 
     private static final int PICK_FILE_REQUEST_CODE = 101;
 
-    private EditText editTextTitle, editTextDate, editTextTime, editTextDescription, editTextRecipientEmail;
+    private EditText editTextTitle, editTextDate, editTextTime, editTextDescription;
     private Button buttonAttachFile, buttonSaveEvent, buttonShareEvent;
 
     private FirebaseFirestore db;
@@ -61,7 +58,6 @@ public class NewEvent extends AppCompatActivity {
         editTextDate = findViewById(R.id.editTextDate);
         editTextTime = findViewById(R.id.editTextTime);
         editTextDescription = findViewById(R.id.editTextDescription);
-        editTextRecipientEmail = findViewById(R.id.editTextRecipientEmail);
         buttonAttachFile = findViewById(R.id.buttonAttachFile);
         buttonSaveEvent = findViewById(R.id.buttonSaveEvent);
         toggleButton = findViewById(R.id.toggleButton);
@@ -235,47 +231,11 @@ public class NewEvent extends AppCompatActivity {
                 "Time: " + time + "\n" +
                 "Description: " + description + "\n";
 
-        // Retrieve email input from EditText
-        String recipientEmail = editTextRecipientEmail.getText().toString();
-
-        // Get UID of the recipient user based on the email
-        FirebaseFirestore.getInstance().collection("users")
-                .whereEqualTo("email", recipientEmail)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String recipientUid = document.getId();
-                            // Call method to share or duplicate event to recipientUid's collection
-                            shareEventWithRecipient(title, date, time, description, recipientUid);
-                        }
-                    } else {
-                        Toast.makeText(NewEvent.this, "Error finding user with this email", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-    }
-
-    private void shareEventWithRecipient(String title, String date, String time, String description, String recipientUid) {
-        // Create a reference to the recipient's events subcollection
-        CollectionReference recipientEventsRef = db.collection("users").document(recipientUid).collection("events");
-
-        // Create a new event document within the recipient's events subcollection
-        Map<String, Object> eventData = new HashMap<>();
-        eventData.put("title", title);
-        eventData.put("date", date);
-        eventData.put("time", time);
-        eventData.put("description", description);
-
-        // Add the event data to Firestore under the recipient's events subcollection
-        recipientEventsRef.add(eventData)
-                .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(NewEvent.this, "Event shared successfully with recipient", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(NewEvent.this, "Failed to share event with recipient", Toast.LENGTH_SHORT).show();
-                });
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailBody);
+        startActivity(Intent.createChooser(intent, "Choose an email client"));
     }
 
 }
