@@ -1,7 +1,9 @@
 package com.example.handymobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +74,18 @@ public class AccountActivity extends AppCompatActivity {
             Log.e("AccountActivity", "Current user is null");
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
+        // Save button click listener
+        findViewById(R.id.buttonEditInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToEditAccount();
+            }
+        });
+    }
+    private void navigateToEditAccount() {
+        Intent intent = new Intent(AccountActivity.this, EditAccount.class);
+        startActivity(intent);
+        finish(); // Finish current activity to prevent going back to NewEventActivity
     }
 
 }

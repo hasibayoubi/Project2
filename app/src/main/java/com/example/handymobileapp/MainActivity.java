@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
      * to ensure a clean state.
      */
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(MainActivity.this, NewEvent.class);
+        Intent intent = new Intent(MainActivity.this, AccountActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
