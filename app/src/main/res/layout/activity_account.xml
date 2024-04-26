@@ -16,7 +16,7 @@
         android:fontFamily="@font/alata"
         android:text="Account Info"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="44sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
