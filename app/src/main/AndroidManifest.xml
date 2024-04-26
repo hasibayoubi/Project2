@@ -36,6 +36,8 @@
             android:exported="false"/>
         <activity android:name=".AccountActivity"
             android:exported="false"/>
+        <activity android:name=".EditAccount"
+            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
