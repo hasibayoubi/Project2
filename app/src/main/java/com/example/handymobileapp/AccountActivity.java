@@ -74,18 +74,33 @@ public class AccountActivity extends AppCompatActivity {
             Log.e("AccountActivity", "Current user is null");
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
-        // Save button click listener
+
+        // Edit button click listener
         findViewById(R.id.buttonEditInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navigateToEditAccount();
             }
         });
+
+        // Logout button click listener
+        findViewById(R.id.buttonLogOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Sign out the current user
+                FirebaseAuth.getInstance().signOut();
+
+                // Navigate back to MainActivity (Login screen)
+                Intent intent = new Intent(AccountActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
     }
+
     private void navigateToEditAccount() {
         Intent intent = new Intent(AccountActivity.this, EditAccount.class);
         startActivity(intent);
         finish(); // Finish current activity to prevent going back to NewEventActivity
     }
-
 }
