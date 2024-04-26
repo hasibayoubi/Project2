@@ -21,10 +21,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.081"
+        app:layout_constraintVertical_bias="0.022"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -141,26 +140,28 @@
 
     <Button
         android:id="@+id/buttonEditInfo"
-        android:layout_width="164dp"
-        android:layout_height="53dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/black"
         android:text="Edit Info"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
-        app:layout_constraintVertical_bias="0.215" />
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/textViewAccount"
+        app:layout_constraintStart_toStartOf="@+id/textViewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
     <Button
         android:id="@+id/buttonLogOut"
-        android:layout_width="164dp"
-        android:layout_height="53dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/black"
         android:text="Log Out"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
-        app:layout_constraintVertical_bias="0.878" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewAccount"
+        app:layout_constraintStart_toStartOf="@+id/textViewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEditInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
