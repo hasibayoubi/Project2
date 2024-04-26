@@ -157,7 +157,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 hashMap.put("name", usersName);
                                 hashMap.put("lastName", usersLastName);
                                 hashMap.put("dateOfBirth", dob);
-                                hashMap.put("email", email);
 
                                 // Set the user details in Firestore
                                 documentReference.set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {

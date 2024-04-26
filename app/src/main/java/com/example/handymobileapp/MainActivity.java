@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     /** TextView that if clicked, navigates the user to the registration activity */
-    TextView createnewAccount;
+    TextView creatnewAccount;
 
     /** TextView that if clicked, navigates the user to reset their password */
     TextView forgotPassword;
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this); // Enable edge-to-edge display mode
         setContentView(R.layout.activity_main);
 
-        createnewAccount = findViewById(R.id.createNewAccount);
+        creatnewAccount = findViewById(R.id.createNewAccount);
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-        createnewAccount.setOnClickListener(new View.OnClickListener() {
+        creatnewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
      * to ensure a clean state.
      */
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+        Intent intent = new Intent(MainActivity.this, calendar.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
