@@ -36,7 +36,7 @@ public class NewEvent extends AppCompatActivity {
     private static final int PICK_FILE_REQUEST_CODE = 101;
 
     private EditText editTextTitle, editTextDate, editTextTime, editTextDescription;
-    private Button buttonAttachFile, buttonSaveEvent;
+    private Button buttonAttachFile, buttonSaveEvent, buttonShareEvent;
 
     private FirebaseFirestore db;
     private FirebaseStorage storage;
@@ -61,6 +61,7 @@ public class NewEvent extends AppCompatActivity {
         buttonAttachFile = findViewById(R.id.buttonAttachFile);
         buttonSaveEvent = findViewById(R.id.buttonSaveEvent);
         toggleButton = findViewById(R.id.toggleButton);
+        buttonShareEvent = findViewById(R.id.buttonShareEvent);
 
         buttonAttachFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +76,13 @@ public class NewEvent extends AppCompatActivity {
                 saveEventToFirestore();
             }
         });
+        buttonShareEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareEventViaEmail();
+            }
+        });
+
     }
 
     private void pickFile() {
@@ -210,4 +218,24 @@ public class NewEvent extends AppCompatActivity {
         startActivity(intent);
         finish(); // Finish current activity to prevent going back to NewEventActivity
     }
+
+    private void shareEventViaEmail() {
+        String title = editTextTitle.getText().toString();
+        String date = editTextDate.getText().toString();
+        String time = editTextTime.getText().toString();
+        String description = editTextDescription.getText().toString();
+
+        String emailSubject = "Invitation to Event: " + title;
+        String emailBody = "Event Details:\n" +
+                "Date: " + date + "\n" +
+                "Time: " + time + "\n" +
+                "Description: " + description + "\n";
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailBody);
+        startActivity(Intent.createChooser(intent, "Choose an email client"));
+    }
+
 }
