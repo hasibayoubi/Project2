@@ -119,7 +119,7 @@ public class EditAccount extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(EditAccount.this, "User info updated successfully", Toast.LENGTH_SHORT).show();
-                            // Optionally finish the activity or perform other actions after successful update
+                            navigateToAccountActivity();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -130,4 +130,5 @@ public class EditAccount extends AppCompatActivity {
                     });
         }
     }
+
 }
