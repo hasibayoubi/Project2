@@ -52,8 +52,6 @@ public class calendar extends AppCompatActivity {
         Calendar currentCalendar = Calendar.getInstance();
         updateSelectedDate(currentCalendar);
         fetchEvents(currentCalendar); // Fetch events for the current date initially
-
-
     }
 
     private void updateSelectedDate(Calendar selectedCalendar) {
