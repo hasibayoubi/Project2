@@ -24,22 +24,27 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="55dp"
+            android:fontFamily="@font/alata"
             android:text="Handy"
             android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="34sp"
+            android:textColor="@color/white"
+            android:textSize="44sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewTitle"
-            android:layout_centerHorizontal="true"
+            android:layout_alignStart="@+id/textViewTitle"
+            android:layout_alignEnd="@+id/textViewTitle"
+            android:layout_marginStart="-126dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="-125dp"
             android:text="Everything you need to be organized at the palm of your hand"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <!-- Add your buttons below the toolbar -->
 
@@ -49,18 +54,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="207dp"
+            android:layout_marginTop="242dp"
             android:layout_marginEnd="16dp"
+            android:background="@color/black"
+            android:textColor="@color/white"
             android:text="New Event" />
 
         <Button
             android:id="@+id/buttonMyEvents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/buttonNewEvent"
+            android:layout_alignEnd="@+id/buttonNewEvent"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="318dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="314dp"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:layout_marginEnd="-2dp"
             android:text="My Events" />
 
         <Button
@@ -68,9 +79,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewDescription"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="279dp"
-            android:layout_marginEnd="16dp"
+            android:layout_alignStart="@+id/buttonMyEvents"
+            android:layout_alignEnd="@+id/buttonMyEvents"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="187dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/black"
+            android:textColor="@color/white"
             android:text="Calendar" />
 
         <Button
@@ -78,9 +93,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewDescription"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="395dp"
-            android:layout_marginEnd="16dp"
+            android:layout_alignStart="@+id/buttonCalendar"
+            android:layout_alignEnd="@+id/buttonCalendar"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="257dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/black"
+            android:textColor="@color/white"
             android:text="Invitations" />
         <!-- Other buttons go here -->
 
