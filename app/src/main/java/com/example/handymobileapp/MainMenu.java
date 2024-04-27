@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,7 +19,7 @@ public class MainMenu extends AppCompatActivity {
         Button buttonNewEvent = findViewById(R.id.buttonNewEvent);
         Button buttonMyEvents = findViewById(R.id.buttonMyEvents);
         Button buttonAccessCalendar = findViewById(R.id.buttonCalendar);
-        Button buttonInvitations = findViewById(R.id.buttonInvitations);
+        Button buttonMyAccount = findViewById(R.id.buttonMyAccount);
        //  searchView = findViewById(R.id.searchView);
 
      /*  menuIcon.setOnClickListener(new View.OnClickListener(){
@@ -42,6 +39,13 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(new Intent(MainMenu.this, NewEvent.class));
             }
         });
+        buttonMyAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to NewEvent activity
+                startActivity(new Intent(MainMenu.this, AccountActivity.class));
+            }
+        });
 
         buttonMyEvents.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,14 +63,6 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        buttonInvitations.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle Invitations button click
-                // Implement your logic here for Invitations activity
-                // Example: startActivity(new Intent(MainMenu.this, InvitationsActivity.class));
-            }
-        });
 
         // Set up search functionality
        /* searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
