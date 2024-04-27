@@ -2,21 +2,12 @@ package com.example.handymobileapp;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -30,26 +21,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import java.util.Calendar;
-import java.util.Date;
 
-
-
-
+/**
+ * @author ivanw845
+ * @version JDK 21
+ * Class for handling the myEvents section of the application. Should display the events the user
+ *  has saved or created.
+ */
 public class MyEvents extends AppCompatActivity {
 
     ListView l;
-    String tutorials[]
-            = { "Algorithms", "Data Structures",
-            "Languages", "Interview Corner",
-            "GATE", "ISRO CS",
-            "UGC NET CS", "CS Subjects",
-            "Web Technologies" };
     private FirebaseFirestore db;
 
     Date currentTime = Calendar.getInstance().getTime();
 
-
+    /**
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +53,7 @@ public class MyEvents extends AppCompatActivity {
 
 
         ArrayAdapter<String> arr;
-        arr = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, displayEvents(fetchEvents(selectedCalendar)) );
+        arr = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, returnEvents(fetchEvents(selectedCalendar)) );
         l.setAdapter(arr);
 
 
@@ -73,8 +65,11 @@ public class MyEvents extends AppCompatActivity {
     }
 
 
-
-
+    /**
+     * Should retrieve all of the events a user has saved, or been invited to.
+     * @param selectedCalendar
+     * @return  a snapshot of the events a user has saved in firebase
+     */
     private QuerySnapshot fetchEvents(Calendar selectedCalendar) {
         // Format selected date to match Firestore query format (yyyy-MM-dd)
         SimpleDateFormat firestoreDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -89,7 +84,13 @@ public class MyEvents extends AppCompatActivity {
                 .get().getResult();
     }
 
-    private List<String> displayEvents(QuerySnapshot querySnapshot) {
+
+    /**
+     * Returns a list of events the user has saved, or been invited to.
+     * @param querySnapshot
+     * @return a list of the events a user has saved, formatted as strings and sorted by time
+     */
+    private List<String> returnEvents(QuerySnapshot querySnapshot) {
         List<Event> eventsList = new ArrayList<>();
 
         // Parse each document into Event object and add to the list
@@ -131,15 +132,18 @@ public class MyEvents extends AppCompatActivity {
             ;
         }
 
-        // Display events in a TextView
-        //TextView eventsTextView = findViewById(R.id.eventsTextView);
-        //eventsTextView.setText(eventsStringBuilder.toString());
+
 
         return events;
 
     }
 
-    // Helper method to parse time string into a Date object
+
+    /**
+     * formats and simplifies the string
+     * @param timeString
+     * @return the formatted date
+     */
     private Date parseTimeString(String timeString) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.getDefault());
