@@ -1,34 +1,39 @@
 package com.example.handymobileapp;
 
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.ImageView;
-//import android.widget.SearchView;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenu extends AppCompatActivity {
- /*
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sidebar_mainmenu);
+        setContentView(R.layout.activity_mainmenu);
 
         // Initialize buttons and search view
         Button buttonNewEvent = findViewById(R.id.buttonNewEvent);
-        //Button buttonMyEvents = findViewById(R.id.buttonMyEvents);
-        //Button buttonAccessCalendar = findViewById(R.id.buttonAccessCalendar);
-        //Button buttonInvitations = findViewById(R.id.buttonInvitations);
-        // searchView = findViewById(R.id.searchView);
-        menuIcon.setOnClickListener(new View.OnClickListener(){
+        Button buttonMyEvents = findViewById(R.id.buttonMyEvents);
+        Button buttonAccessCalendar = findViewById(R.id.buttonCalendar);
+        Button buttonInvitations = findViewById(R.id.buttonInvitations);
+       //  searchView = findViewById(R.id.searchView);
+
+     /*  menuIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 openCustomMenu();
             }
         });
+
+      */
+
         // Set click listeners for buttons
         buttonNewEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +47,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to calendar activity (My Events)
-                startActivity(new Intent(MainMenu.this, calendar.class));
+                startActivity(new Intent(MainMenu.this, MyEvents.class));
             }
         });
 
@@ -64,7 +69,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         // Set up search functionality
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+       /* searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // Handle search query submission
@@ -80,10 +85,13 @@ public class MainMenu extends AppCompatActivity {
                 return false;
             }
         });
+
+        */
+
     }
 
     // Method to handle opening the custom menu
-    private void openCustomMenu() {
+ /*   private void openCustomMenu() {
         // Inflate the menu layout from ic_menu.xml
         View menuView = getLayoutInflater().inflate(R.layout.ic_menu, null);
 
@@ -107,6 +115,8 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+
+
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,5 +129,7 @@ public class MainMenu extends AppCompatActivity {
         // Show the PopupMenu
         popupMenu.show();
     }
+
   */
+
 }

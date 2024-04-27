@@ -12,11 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HandyMobileApp"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_handy_home"
-            android:theme="@style/Theme.HandyMobileApp.NoActionBar" >
+
+            android:theme="@style/Theme.HandyMobileApp.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
 
         </activity>
         <activity
@@ -27,13 +35,25 @@
             android:exported="false" />
         <activity
             android:name=".calendar"
-            android:exported="true">
+            android:exported="false" />
+        <activity
+            android:name=".NewEvent"
+            android:exported="false" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditAccount"
+            android:exported="false" />
+        <activity
+            android:name=".MainMenu"
+            android:exported="false" />
+        <activity
+            android:name=".MyEvents"
+            android:exported="false" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
 
         <meta-data
             android:name="preloaded_fonts"
