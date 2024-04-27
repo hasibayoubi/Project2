@@ -63,12 +63,15 @@ public class EditAccount extends AppCompatActivity {
             }
         });
     }
+
+    // Method to navigate back to the AccountActivity
     private void navigateToAccountActivity() {
         Intent intent = new Intent(EditAccount.this, AccountActivity.class);
         startActivity(intent);
         finish(); // Finish current activity to prevent going back to NewEventActivity
     }
 
+    // Method to fetch user details from Firestore and populate EditTexts
     private void fetchUserDetails() {
         if (currentUser != null) {
             // Get the user's document reference from Firestore based on their UID
@@ -102,11 +105,13 @@ public class EditAccount extends AppCompatActivity {
         }
     }
 
+    // Method to update user information in Firestore
     private void updateUserInfo() {
         // Get updated user info from EditTexts
         String updatedName = editTextName.getText().toString().trim();
         String updatedLastName = editTextLastName.getText().toString().trim();
         String updatedDOB = editTextDOB.getText().toString().trim();
+        String updatedEmail = editTextEmail.getText().toString().trim();
 
         // Update user details in Firestore
         if (currentUser != null) {
@@ -114,7 +119,8 @@ public class EditAccount extends AppCompatActivity {
 
             userRef.update("name", updatedName,
                             "lastName", updatedLastName,
-                            "dateOfBirth", updatedDOB)
+                            "dateOfBirth", updatedDOB,
+                            "email", updatedEmail)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -130,5 +136,4 @@ public class EditAccount extends AppCompatActivity {
                     });
         }
     }
-
 }
