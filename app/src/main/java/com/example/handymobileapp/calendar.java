@@ -22,11 +22,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Activity class to display and manage a calendar view where users can select a date
+ * and view events for that date from Firestore.
+ */
 public class calendar extends AppCompatActivity {
 
     private TextView selectedDateTextView;
     private FirebaseFirestore db;
 
+    /**
+     * Called when the activity is starting. Initializes the activity, calendar view,
+     * and fetches the events for the current date.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     * then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     * Otherwise it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +65,20 @@ public class calendar extends AppCompatActivity {
         fetchEvents(currentCalendar); // Fetch events for the current date initially
     }
 
+    /**
+     * Updates the TextView to display the selected date.
+     * @param selectedCalendar the calendar instance representing the selected date
+     */
     private void updateSelectedDate(Calendar selectedCalendar) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault());
         String selectedDateString = sdf.format(selectedCalendar.getTime());
         selectedDateTextView.setText(selectedDateString);
     }
 
+    /**
+     * Fetches events from Firestore for the selected date.
+     * @param selectedCalendar the calendar instance representing the selected date
+     */
     private void fetchEvents(Calendar selectedCalendar) {
         // Format selected date to match Firestore query format (yyyy-MM-dd)
         SimpleDateFormat firestoreDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -81,7 +100,10 @@ public class calendar extends AppCompatActivity {
                 });
     }
 
-
+    /**
+     * Displays the fetched events in a TextView.
+     * @param querySnapshot the Firestore query snapshot containing event documents
+     */
     private void displayEvents(QuerySnapshot querySnapshot) {
         List<Event> eventsList = new ArrayList<>();
 
@@ -125,7 +147,11 @@ public class calendar extends AppCompatActivity {
         eventsTextView.setText(eventsStringBuilder.toString());
     }
 
-    // Helper method to parse time string into a Date object
+    /**
+     * Parses a time string into a Date object.
+     * @param timeString the string representation of the time
+     * @return a Date object
+     */
     private Date parseTimeString(String timeString) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.getDefault());

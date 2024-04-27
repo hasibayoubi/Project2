@@ -19,6 +19,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * Activity for editing and updating a user's account information stored in Firebase Firestore.
+ */
 public class EditAccount extends AppCompatActivity {
 
     private EditText editTextName, editTextLastName, editTextDOB, editTextEmail;
@@ -27,6 +30,11 @@ public class EditAccount extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
 
+    /**
+     * Initializes the activity, Firestore and FirebaseAuth instances, and UI elements.
+     * Retrieves and displays current user details.
+     * @param savedInstanceState Bundle containing the activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +79,9 @@ public class EditAccount extends AppCompatActivity {
         finish(); // Finish current activity to prevent going back to NewEventActivity
     }
 
-    // Method to fetch user details from Firestore and populate EditTexts
+    /**
+     * Fetches and displays the current user's details from Firestore.
+     */
     private void fetchUserDetails() {
         if (currentUser != null) {
             // Get the user's document reference from Firestore based on their UID
@@ -105,7 +115,9 @@ public class EditAccount extends AppCompatActivity {
         }
     }
 
-    // Method to update user information in Firestore
+    /**
+     * Updates the user's information in Firestore based on input from EditText fields.
+     */
     private void updateUserInfo() {
         // Get updated user info from EditTexts
         String updatedName = editTextName.getText().toString().trim();

@@ -15,17 +15,25 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * Activity class that handles user account information display and interactions.
+ */
 public class AccountActivity extends AppCompatActivity {
 
     // TextViews to display user information
     private TextView textViewName, textViewLastName, textViewDOB, textViewEmail;
 
+    /**
+     * Called when the activity is starting.
+     * This method initializes the layout and its components, and loads user data from Firestore.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle). Otherwise it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        // Initialize TextViews
+        // Initialize TextViews by finding them by their IDs
         textViewName = findViewById(R.id.textViewName);
         textViewLastName = findViewById(R.id.textViewLastName);
         textViewDOB = findViewById(R.id.textViewDOB);
@@ -99,7 +107,9 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
-    // Method to navigate to EditAccount activity
+    /**
+     * Navigates to the EditAccount activity to allow the user to edit their personal information.
+     */
     private void navigateToEditAccount() {
         Intent intent = new Intent(AccountActivity.this, EditAccount.class);
         startActivity(intent);

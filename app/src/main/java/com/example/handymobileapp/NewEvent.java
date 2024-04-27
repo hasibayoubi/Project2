@@ -31,6 +31,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Activity for creating a new event with the ability to attach files and save to Firestore.
+ */
 public class NewEvent extends AppCompatActivity {
 
     private static final int PICK_FILE_REQUEST_CODE = 101;
@@ -45,6 +48,11 @@ public class NewEvent extends AppCompatActivity {
 
     private Uri selectedFileUri;
 
+    /**
+     * Initializes the activity, UI components, and Firebase instances.
+     * Sets up listeners for file attachment and saving the event.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle). Otherwise it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +85,21 @@ public class NewEvent extends AppCompatActivity {
         });
     }
 
+    /**
+     * Launches an intent to pick a file from the device storage.
+     */
     private void pickFile() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*"); // Allow all file types
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE);
     }
 
+    /**
+     * Handles the result from launching the file picker intent.
+     * @param requestCode The integer request code originally supplied to startActivityForResult(), allowing you to identify who this result came from.
+     * @param resultCode The integer result code returned by the child activity through its setResult().
+     * @param data An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -92,6 +109,9 @@ public class NewEvent extends AppCompatActivity {
         }
     }
 
+    /**
+     * Saves the new event to Firestore with optional file attachment.
+     */
     private void saveEventToFirestore() {
         String title = editTextTitle.getText().toString();
         String date = editTextDate.getText().toString();
@@ -143,6 +163,13 @@ public class NewEvent extends AppCompatActivity {
         }
     }
 
+    /**
+     * Formats the input time based on the 12-hour clock format with AM/PM.
+     * It handles parsing of the given time string according to "hh:mm" format.
+     * @param inputTime The time string to format.
+     * @param isPM Boolean flag to indicate if the time is in 'PM'.
+     * @return Formatted time string or null if parsing fails.
+     */
     private String formatTime(String inputTime, boolean isPM) {
         try {
             SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
@@ -162,6 +189,16 @@ public class NewEvent extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adds a new event to Firestore under the user's events subcollection. It constructs
+     * the event data and attempts to add it to Firestore, providing feedback via Toasts
+     * based on the outcome of the Firestore operation.
+     * @param title The title of the event.
+     * @param date Formatted date of the event.
+     * @param time Formatted time of the event.
+     * @param description Description of the event.
+     * @param attachmentUrl URL of the attached file, if any.
+     */
     private void addEventToFirestore(String title, String date, String time, String description, String attachmentUrl) {
         // Get current user's UID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -190,7 +227,11 @@ public class NewEvent extends AppCompatActivity {
                 });
     }
 
-
+    /**
+     * Formats a given date string from "MM/dd/yyyy" format to "yyyy-MM-dd" format.
+     * @param inputDate The date string to format.
+     * @return The formatted date string or null if parsing fails.
+     */
     private String formatDate(String inputDate){
         try {
             //Parse input date in mm/dd/yyyy
@@ -205,6 +246,10 @@ public class NewEvent extends AppCompatActivity {
             return null;
         }
     }
+    /**
+     * Navigates to the CalendarActivity and finishes the current activity.
+     * This method ensures that the user does not return to the NewEvent activity.
+     */
     private void navigateToCalendarActivity() {
         Intent intent = new Intent(NewEvent.this, calendar.class);
         startActivity(intent);
