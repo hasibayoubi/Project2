@@ -16,7 +16,9 @@
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_handy_home"
-            android:theme="@style/Theme.HandyMobileApp.NoActionBar" />
+            android:theme="@style/Theme.HandyMobileApp.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
