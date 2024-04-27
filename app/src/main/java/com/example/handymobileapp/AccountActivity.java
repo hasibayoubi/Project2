@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AccountActivity extends AppCompatActivity {
 
+    // TextViews to display user information
     private TextView textViewName, textViewLastName, textViewDOB, textViewEmail;
 
     @Override
@@ -98,9 +99,10 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
+    // Method to navigate to EditAccount activity
     private void navigateToEditAccount() {
         Intent intent = new Intent(AccountActivity.this, EditAccount.class);
         startActivity(intent);
-        finish(); // Finish current activity to prevent going back to NewEventActivity
+        finish(); // Finish current activity to prevent going back to AccountActivity
     }
 }
