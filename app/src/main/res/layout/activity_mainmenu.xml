@@ -74,14 +74,14 @@
             android:text="Calendar" />
 
         <Button
-            android:id="@+id/buttonInvitations"
+            android:id="@+id/buttonMyAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewDescription"
             android:layout_marginStart="16dp"
             android:layout_marginTop="395dp"
             android:layout_marginEnd="16dp"
-            android:text="Invitations" />
+            android:text="My Account" />
         <!-- Other buttons go here -->
 
     </RelativeLayout>

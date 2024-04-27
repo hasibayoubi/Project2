@@ -15,7 +15,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_handy_home"
 
             android:theme="@style/Theme.HandyMobileApp.NoActionBar">
@@ -51,8 +51,6 @@
         <activity
             android:name=".MyEvents"
             android:exported="false" />
-
-        </activity>
 
 
         <meta-data
