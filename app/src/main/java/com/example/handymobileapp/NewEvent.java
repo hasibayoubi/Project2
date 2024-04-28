@@ -18,7 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -30,11 +29,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 /**
+ * @author Misael
  * Activity for creating a new event with the ability to attach files and save to Firestore.
  */
 public class NewEvent extends AppCompatActivity {
@@ -274,11 +273,11 @@ public class NewEvent extends AppCompatActivity {
         String time = editTextTime.getText().toString();
         String description = editTextDescription.getText().toString();
 
-        String emailSubject = "Invitation to Event: " + title;
-        String emailBody = "Event Details:\n" +
-                "Date: " + date + "\n" +
-                "Time: " + time + "\n" +
-                "Description: " + description + "\n";
+        //String emailSubject = "Invitation to Event: " + title;
+        //String emailBody = "Event Details:\n" +
+                //"Date: " + date + "\n" +
+                //"Time: " + time + "\n" +
+                //"Description: " + description + "\n";
 
         // Retrieve email input from EditText
         String recipientEmail = editTextRecipientEmail.getText().toString();

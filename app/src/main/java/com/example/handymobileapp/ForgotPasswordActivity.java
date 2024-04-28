@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
+ * @author Hasibullah
  * Activity to handle password reset requests.
  */
 public class ForgotPasswordActivity extends AppCompatActivity {

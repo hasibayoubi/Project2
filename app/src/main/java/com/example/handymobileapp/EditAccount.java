@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
+ * @author Misael
  * Activity for editing and updating a user's account information stored in Firebase Firestore.
  */
 public class EditAccount extends AppCompatActivity {

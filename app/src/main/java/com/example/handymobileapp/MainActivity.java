@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
+ * @author Hasibullah
  * MainActivity class that serves as the login screen for the application.
  */
 public class MainActivity extends AppCompatActivity {

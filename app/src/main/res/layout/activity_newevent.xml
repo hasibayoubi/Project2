@@ -135,7 +135,7 @@
         android:layout_below="@+id/buttonAttachFile"
         android:layout_marginStart="16dp"
         android:layout_marginTop="57dp"
-        android:text="Email Recepient:"
+        android:text="Email Recipient:"
         android:textSize="16sp" />
 
     <EditText

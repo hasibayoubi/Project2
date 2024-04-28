@@ -2,7 +2,6 @@ package com.example.handymobileapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,9 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
+ * @author Hasibullah
  * RegisterActivity handles user registration using Firebase authentication.
  */
 public class RegisterActivity extends AppCompatActivity {
@@ -107,6 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
+     *
      * Performs user registration using email and password entered along with additional user details
      * like name, last name, and date of birth. It validates the user inputs and interacts with Firebase
      * Authentication to create a user account. Post registration, it saves additional user details to

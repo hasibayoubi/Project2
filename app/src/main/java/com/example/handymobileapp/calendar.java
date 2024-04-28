@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ * @author Misael
  * Activity class to display and manage a calendar view where users can select a date
  * and view events for that date from Firestore.
  */

@@ -2,6 +2,7 @@
 package com.example.handymobileapp;
 import java.util.Date;
 /**
+ * @author Misael
  * Represents an event with a title, time, and description.
  */
 public class Event {
