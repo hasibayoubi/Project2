@@ -39,5 +39,14 @@
         android:name="com.example.handymobileapp.NewEvent"
         android:label="NewEvent"
         tools:layout="@layout/activity_newevent"/>
+    <activity
+        android:id="@+id/myEvents"
+        android:name="com.example.handymobileapp.MyEvents"
+        android:label="activity_my_events"
+        tools:layout="@layout/activity_my_events" />
+    <activity
+        android:id="@+id/mainMenu"
+        android:name="com.example.handymobileapp.MainMenu"
+        android:label="MainMenu" />
 
 </navigation>
