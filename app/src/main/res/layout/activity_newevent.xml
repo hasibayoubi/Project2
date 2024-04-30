@@ -134,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonAttachFile"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="28dp"
         android:text="Email Recipient:"
         android:textSize="16sp" />
 
