@@ -146,21 +146,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="16dp" />
 
     <Button
         android:id="@+id/buttonShareEvent"
         android:layout_width="245dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonSaveEvent"
         android:layout_below="@+id/buttonAttachFile"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="83dp"
-        android:layout_marginTop="137dp"
+        android:layout_marginTop="106dp"
         android:layout_marginEnd="83dp"
-        android:layout_marginBottom="41dp"
         android:text="Share Event" />
 
     <Button
