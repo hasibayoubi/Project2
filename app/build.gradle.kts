@@ -50,6 +50,10 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.legacy.support.v4)
     implementation(libs.core)
+    implementation(fileTree(mapOf(
+        "dir" to "/Users/hasibullahayoubi/Library/Android/sdk/platforms/android-34",
+        "include" to listOf("*.aar", "*.jar"),
+    )))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
